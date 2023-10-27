@@ -22,17 +22,19 @@ const login = () => {
 </script>
 
 <template>
+  <img src="@/assets/img/Frame1.svg" alt="Background" class="absolute inset-0 object-cover" />
+
   <div class="min-h-screen flex items-center justify-center relative">
-    <img src="@/assets/img/Frame1.svg" alt="Background" class="absolute inset-0 object-cover" />
     <div class="absolute inset-0 bg-white h-full bg-opacity-50 backdrop-blur-sm"></div>
 
-    <div class="w-1/3 z-10 bg-opacity-0 p-8 absolute right-20">
+    <div class="w-1/2 z-10 p-8 absolute right-20">
       <div class="flex items-center">
-        <h1 class="text-4xl font-poppins text-gray-500 text-center">Test Forge</h1>
-        <img src="/src/assets/img/hammer.svg" alt="SVG" class="ml-4" />
+        <h1 class="text-7xl ml-20 font-poppins text-gray-500 text-center">Test Forge</h1>
+
+        <img src="/src/assets/img/hammer.svg" alt="SVG" class="ml-6" />
       </div>
       <form @submit.prevent="login" class="bg-opacity-0">
-        <div class="mb-6">
+        <div class="mb-6 w-full">
           <label for="username" class="block text-gray-500 text-2xl font-poppins mb-2"
             >Correo</label
           >
@@ -41,7 +43,7 @@ const login = () => {
             type="text"
             id="username"
             name="username"
-            class="w-full p-2 text-xl border border-gray-600 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
+            class="w-1/2 p-2 text-xl border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
           />
         </div>
         <div class="mb-6">
@@ -53,15 +55,15 @@ const login = () => {
             type="password"
             id="password"
             name="password"
-            class="w-full p-2 text-xl border border-gray-600 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
+            class="w-1/2 p-2 text-xl border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
           />
         </div>
         <div class="text-center">
           <button
-            class="w-full relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-lg font-medium text-gray-900 rounded-full group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800"
+            class="w-500 relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-lg font-medium text-gray-900 rounded-full group bg-gradient-to-br from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 hover:text-white dark:text-white focus:ring-4 focus:ring-pink-200 dark:focus:ring-pink-800"
           >
             <span
-              class="w-full relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0"
+              class="w-500 relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-full group-hover:bg-opacity-0"
             >
               Iniciar sesión
             </span>
