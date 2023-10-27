@@ -29,13 +29,13 @@ const login = () => {
 
     <div class="w-1/2 z-10 p-8 absolute right-20">
       <div class="flex items-center">
-        <h1 class="text-7xl ml-20 font-poppins text-gray-500 text-center">Test Forge</h1>
+        <h1 class="text-7xl ml-40 font-poppins text-gray-500 text-center">Test Forge</h1>
 
         <img src="/src/assets/img/hammer.svg" alt="SVG" class="ml-6" />
       </div>
       <form @submit.prevent="login" class="bg-opacity-0">
         <div class="mb-6 w-full">
-          <label for="username" class="block text-gray-500 text-2xl font-poppins mb-2"
+          <label for="username" class="ml-40 block text-gray-500 text-2xl font-poppins mb-2"
             >Correo</label
           >
           <input
@@ -43,11 +43,11 @@ const login = () => {
             type="text"
             id="username"
             name="username"
-            class="w-1/2 p-2 text-xl border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
+            class="ml-40 w-1/2 p-2 text-xl border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
           />
         </div>
         <div class="mb-6">
-          <label for="password" class="block text-gray-500 text-2xl font-poppins mb-2"
+          <label for="password" class="ml-40 block text-gray-500 text-2xl font-poppins mb-2"
             >Contraseña</label
           >
           <input
@@ -55,7 +55,7 @@ const login = () => {
             type="password"
             id="password"
             name="password"
-            class="w-1/2 p-2 text-xl border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
+            class="ml-40 w-1/2 p-2 text-xl border border-gray-400 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
           />
         </div>
         <div class="text-center">
