@@ -24,9 +24,9 @@ const login = () => {
 <template>
   <div class="min-h-screen flex items-center justify-center relative">
     <img src="@/assets/img/Frame1.svg" alt="Background" class="absolute inset-0 object-cover" />
-    <div class="absolute inset-0 bg-white bg-opacity-50 backdrop-blur-sm"></div>
+    <div class="absolute inset-0 bg-white h-full bg-opacity-50 backdrop-blur-sm"></div>
 
-    <div class="w-1/3 bg-opacity-0 p-8 absolute right-20">
+    <div class="w-1/3 z-10 bg-opacity-0 p-8 absolute right-20">
       <div class="flex items-center">
         <h1 class="text-4xl font-poppins text-gray-500 text-center">Test Forge</h1>
         <img src="/src/assets/img/hammer.svg" alt="SVG" class="ml-4" />
@@ -41,7 +41,7 @@ const login = () => {
             type="text"
             id="username"
             name="username"
-            class="w-full p-2 text-xl border border-transparent rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
+            class="w-full p-2 text-xl border border-gray-600 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
           />
         </div>
         <div class="mb-6">
@@ -53,7 +53,7 @@ const login = () => {
             type="password"
             id="password"
             name="password"
-            class="w-full p-2 text-xl border border-transparent rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
+            class="w-full p-2 text-xl border border-gray-600 rounded-md focus:outline-none focus:ring focus:ring-indigo-300"
           />
         </div>
         <div class="text-center">
