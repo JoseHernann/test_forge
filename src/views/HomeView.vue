@@ -132,7 +132,7 @@ function flipCard(index:number){
         <div class="bg-gradient-to-b from-gray-400 rounded-xl w-[18rem] h-[28rem]  flex flex-col justify-between">
           <BookOpenIcon class="stroke-[0.5] stroke-gray-500 w-60 self-center mt-10"/>
           <p class="text-2xl  text-gray-500 mx-5 my-5">04.<br>Plantillas</p>
-          <p class="bg-red-500 absolute bottom-40 right-28 p-2 rounded-lg text-white">PROXIMAMENTE</p>
+          <p class="bg-red-500 sticky bottom-40 right-28 p-2 rounded-lg text-white w-fit ml-20">PROXIMAMENTE</p>
         </div>
       </div>
     </div>

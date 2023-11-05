@@ -95,7 +95,7 @@ function nextStep(){
 
     <div class="flex flex-col m-20" v-show="step == 1">
       <p class="text-6xl mb-8" >Escribe el nombre de tu examen 📄 </p>
-      <input type="text" class=" h-32 text-6xl text-pink-500 rounded-xl border-2 p-4" v-model="exam.name">
+      <input type="text" class=" h-32 text-6xl text-pink-500 rounded-xl border-2 p-4" v-model="exam.name" placeholder="Examen 1">
     </div>
 
     <div v-show="step == 2" class="flex flex-col mx-20 my-10" >
@@ -138,7 +138,6 @@ function nextStep(){
             {{ theme }}
           </button>
         </div>
-        <VLoader :width="10" v-if="isLoading" />
       </div>
 
       <div class="flex justify-center flex-col items-center transition-all " v-show="exam.theme != ''">
