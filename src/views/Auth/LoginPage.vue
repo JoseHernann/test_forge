@@ -22,18 +22,19 @@ const login = () => {
 </script>
 
 <template>
-  <img src="@/assets/img/Frame1.svg" alt="Background" class="absolute inset-0 object-cover" />
+  <img src="@/assets/img/Frame1.svg" alt="Background" class="absolute left-16 object-cover h-full " />
 
   <div class="min-h-screen flex items-center justify-center relative">
     <div class="absolute inset-0 bg-white h-full bg-opacity-50 backdrop-blur-sm"></div>
     <div class="w-1/2 z-10 p-8 absolute right-20">
-      <div class="flex items-center">
-        <h1 class="text-7xl ml-40 font-poppins text-gray-500 text-center">Test Forge</h1>
-        <img src="/src/assets/img/hammer.svg" alt="SVG" class="ml-6" />
+      <div class="flex  flex-col w-fit mb-10 ">
+        <img src="/src/assets/img/hammer.svg" alt="SVG" class="ml-6 h-10 self-end -mr-8 -mb-6 rotate-6" />
+        <h1 class="text-6xl ml-40 font-poppins  text-center ">Test Forge</h1>
+
       </div>
       <form @submit.prevent="login" class="bg-opacity-0">
         <div class="mb-6 w-full">
-          <label for="username" class="ml-40 block text-gray-500 text-2xl font-poppins mb-2"
+          <label for="username" class="ml-40 block text-gray-500 text-2xl  mb-2"
             >Correo</label
           >
           <input
@@ -45,7 +46,7 @@ const login = () => {
           />
         </div>
         <div class="mb-6">
-          <label for="password" class="ml-40 block text-gray-500 text-2xl font-poppins mb-2"
+          <label for="password" class="ml-40 block text-gray-500 text-2xl  mb-2"
             >Contraseña</label
           >
           <input
