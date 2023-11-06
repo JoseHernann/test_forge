@@ -3,7 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-
+      {
+          path: '/login',
+          name: 'login',
+          component: () => import('../views/Auth/LoginPage.vue')
+      },
     {
       path: '/',
       name: 'layout',
@@ -27,11 +31,7 @@ const router = createRouter({
       ]
     },
 
-  {
-    path: '/',
-    name: 'login',
-    component: () => import('../views/Auth/LoginPage.vue')
-  },
+
 
   ]
 })
