@@ -8,8 +8,6 @@ import GeneratedExam from "@/views/auxComponents/GeneratedExam.vue";
 import {Toast} from "@/utils/alerts";
 
 const step = ref(1)
-
-const isMounted = ref(false)
 const exam = reactive({
   name: '',
   school: '',
@@ -78,7 +76,6 @@ function nextStep(){
       return step.value++
     }
 
-
   }
   else {
     step.value++
@@ -95,7 +92,7 @@ function nextStep(){
 
     <div class="flex flex-col m-20" v-show="step == 1">
       <p class="text-6xl mb-8" >Escribe el nombre de tu examen 📄 </p>
-      <input type="text" class=" h-32 text-6xl text-pink-500 rounded-xl border-2 p-4" v-model="exam.name" placeholder="Examen 1">
+      <input type="text" class=" h-32 text-6xl text-pink-500 rounded-xl border-2 p-4" v-model="exam.name" placeholder="Examen 1" @keypress.enter="nextStep">
     </div>
 
     <div v-show="step == 2" class="flex flex-col mx-20 my-10" >

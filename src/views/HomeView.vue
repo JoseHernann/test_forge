@@ -3,6 +3,7 @@ import  {ChatBubbleLeftRightIcon , BeakerIcon , CircleStackIcon , BookOpenIcon ,
 import  { CheckCircleIcon } from "@heroicons/vue/24/solid";
 import {ref} from "vue";
 import router from "@/router";
+import {Toast} from "@/utils/alerts";
 
 const flip = ref([false, false, false, false])
 
@@ -118,7 +119,10 @@ function flipCard(index:number){
                     </ul>
                   </div>
                   <button
-                      @click='router.push("/base-de-datos")'
+                      @click='Toast.fire({
+                        icon: "info",
+                        title: "Proximamente"
+                      })'
                       class="flex  rounded-3xl items-center mx-10 justify-center gap-4 mt-9 p-3 bg-purple-500 text-white hover:bg-white hover:text-purple-600 start hover:stroke-pink-500 start-ia-btn ">
                       Comenzar
                     <ArrowUpRightIcon class="w-7 rounded-xl stroke-white stroke-2 h-7 border-white border p-0.5 "/>

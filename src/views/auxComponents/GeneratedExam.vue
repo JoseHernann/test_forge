@@ -4,6 +4,9 @@ import {collection, doc, getDocs, query, where} from "firebase/firestore";
 import {db}  from "@/services/firebase";
 import html2pdf from "html2pdf.js";
 import {Toast} from "@/utils/alerts";
+import  { DocumentArrowDownIcon } from "@heroicons/vue/24/outline";
+import VLoader from "@/components/VLoader.vue";
+
 
 const props = defineProps({
   exam: {
@@ -17,7 +20,7 @@ const props = defineProps({
   maxQuestions: String as Number
 })
 const html2Pdf = ref(null)
-
+const isLoading = ref(false)
 const questions = ref([]);
 const options = ref([]);
 
@@ -26,6 +29,7 @@ onMounted(() => {
 })
 
 async function getQuestions() {
+  isLoading.value = true;
   try {
     const qs = await getDocs(query(collection(db, props.exam.subject), where("Tema", "==", props.exam.theme)));
     qs.forEach((doc) => {
@@ -42,18 +46,17 @@ async function getQuestions() {
     });
   }
   catch (e) {
-    Toast.fire({
+    return Toast.fire({
       icon: 'error',
       title: 'Error al obtener preguntas'
     })
   }
-
+  isLoading.value = false;
 }
 
 
 
 function downloadPDF() {
-
   // Obtiene el contenido del div `#exam`
   const content = document.getElementById('exam');
   const source = content.innerHTML;
@@ -62,18 +65,33 @@ function downloadPDF() {
     margin:       10,
     image:        { type: 'jpg', quality: 0.98 },
     html2canvas: { scale: 2 },
-    jsPDF:        { unit: 'pt', format: 'a4', orientation: 'portrait' }
+    jsPDF:        { unit: 'pt', format: 'a4', orientation: 'portrait' },
+
   };
-
-  html2pdf().set(opt).from(source).save('examen.pdf');
-
+  try {
+    html2pdf().set(opt).from(source).save('examen.pdf');
+    Toast.fire({
+      icon: 'success',
+      title: 'PDF Generado'
+    })
+  }
+  catch (e){
+    Toast.fire({
+      icon: 'error',
+      title: 'Error al descargar PDF'
+    })
+  }
 }
 
 
 </script>
 
 <template>
-      <button @click="downloadPDF">Generar PDF</button>
+      <div class="flex justify-center">
+        <button @click="downloadPDF" class="hover:bg-pink-500 border-pink-500 border-2 rounded-xl p-2 text-pink-500 hover:text-white font-semibold " >
+          <span class="flex items-center gap-3 ">DESCARGAR PDF <DocumentArrowDownIcon class="w-7"/></span>
+        </button>
+      </div>
       <div class=" flex flex-col border-black border-2 m-12 pb-20 pt-10 " id="exam" >
         <div class="flex flex-col items-center" >
         <p class="text-xl font-semibold">{{ props.exam.school }}</p>
@@ -107,7 +125,7 @@ function downloadPDF() {
             <p v-if="props.exam.typeOfQuestions == 'Opción multiple'"><span class="font-semibold">Instrucciones:</span> Encierra el inciso correcto en las siguientes preguntas</p>
             <p v-if="props.exam.typeOfQuestions == 'Abiertas'"><span class="font-semibold">Instrucciones:</span> Escribe la respuesta correcta</p>
           </div>
-            <div class="flex flex-col gap-20" >
+            <div class="flex flex-col gap-20" v-if="!isLoading" >
               <div v-for="(question, index) in questions" :key="index" >
                 <div class="flex gap-3 mb-3" >
                   <span>{{index + 1 +'.-'}}</span>
@@ -123,7 +141,9 @@ function downloadPDF() {
                 </div>
               </div>
             </div>
-
+          <div class="flex place-content-center" v-if="isLoading">
+            <VLoader :width="26"/>
+          </div>
         </div>
       </div>
 </template>
