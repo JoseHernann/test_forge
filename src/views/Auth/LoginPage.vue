@@ -5,11 +5,10 @@ import { useRoute, useRouter } from 'vue-router'
 const email = ref('')
 const password = ref('')
 const error = ref('')
-
 const router = useRouter()
 
 const login = () => {
-  if (email.value === 'aleOrozco@uanl.edu' && password.value === '123') {
+  if (email.value === 'alejandraOP@uanl.edu' && password.value === '123m_') {
     router.push({ name: 'home' })
   } else {
     if (!email.value || !password.value) {

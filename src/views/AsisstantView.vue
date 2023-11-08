@@ -6,10 +6,8 @@ import {
   DocumentTextIcon
 } from '@heroicons/vue/24/outline'
 import { onBeforeMount, onMounted, ref } from 'vue'
+import jsPDF from 'jspdf'
 
-const printPDF = () => {
-  window.print()
-}
 const step = ref(1)
 const showQuestionsBlock = ref(false)
 const isMounted = ref(false)
@@ -33,7 +31,7 @@ const examen = ref({
   ]
 })
 
-// Método para agregar una nueva pregunta
+//Agregar preguntas
 const addQuestion = () => {
   examen.value.questions.push({
     type: examen.value.selectedQuestionType,
@@ -51,6 +49,77 @@ const addQuestion = () => {
   showQuestionsBlock.value = true
 }
 
+const getInciso = (index: number) => {
+  const letras = 'abcdefghijklmnopqrstuvwxyz' // Puedes agregar más letras según tus necesidades
+  if (index < letras.length) {
+    return letras[index] + ')' // Devuelve letras minúsculas como incisos (a), (b), (c), ...
+  } else {
+    return index - letras.length + 1 + ')' // Utiliza números para más opciones (1), (2), (3), ...
+  }
+}
+
+const downloadPDF = () => {
+  const doc = new jsPDF()
+
+  doc.setFontSize(16)
+  doc.text(examen.value.name, 10, 10)
+
+  let y = 30
+  doc.setFontSize(12)
+
+  doc.text(`Escuela: ${examen.value.school}`, 10, y)
+  y += 10
+  doc.text(`Docente: ${examen.value.teacher}`, 10, y)
+  y += 10
+  doc.text(`Materia: ${examen.value.subject}`, 10, y)
+
+  y += 20
+  doc.setFontSize(12)
+  doc.text('Instrucciones', 10, y)
+
+  const instructions = [
+    `1. Este examen consta de ${examen.value.questions.length} preguntas.`,
+    '2. No se permite el uso de dispositivos electrónicos.',
+    '3. Tiempo máximo: 60 minutos.'
+  ]
+
+  y += 10
+  doc.setFontSize(10)
+  instructions.forEach((instruction) => {
+    y += 10
+    doc.text(instruction, 15, y)
+  })
+
+  // Agrega las preguntas y opciones al PDF
+  examen.value.questions.forEach((question, index) => {
+    y += 20
+    doc.setFontSize(12)
+    doc.text(`Pregunta ${index + 1}: ${question.question}`, 10, y)
+
+    if (question.options.length > 0) {
+      y += 10
+      doc.setFontSize(10)
+      question.options.forEach((option, optionIndex) => {
+        y += 10
+        doc.text(`- ${option.option}`, 15, y)
+      })
+    }
+  })
+
+  // Agrega el espacio para calificación y firmas
+  y += 20
+  doc.setFontSize(10)
+  doc.text('Calificación: ________ / 10', 10, y)
+  y += 10
+  doc.text('Firma del Estudiante: __________________________', 10, y)
+  y += 10
+  doc.text('Firma del Profesor: ___________________________', 10, y)
+
+  // Guarda y descarga el PDF
+  doc.save('ExamenTestForge.pdf')
+}
+
+//Opciones preguntas cerradas
 const addOption = (question: { options: Array<{ option: string; isCorrect: boolean }> }) => {
   question.options.push({
     option: '',
@@ -58,6 +127,7 @@ const addOption = (question: { options: Array<{ option: string; isCorrect: boole
   })
 }
 
+//Eliminar Opcion de respuesta
 const removeOption = (
   question: {
     options: Array<{ option: string; isCorrect: boolean }>
@@ -67,9 +137,12 @@ const removeOption = (
   question.options.splice(optionIndex, 1)
 }
 
+//Eliminar preguntas agregadas
 const removeQuestion = (index: number) => {
   examen.value.questions.splice(index, 1)
 }
+
+//Descargar en PDF el examen
 </script>
 
 <template>
@@ -120,6 +193,7 @@ const removeQuestion = (index: number) => {
     <div class="bg-black w-32 rounded-r-2xl text-6xl text-white flex justify-center mt-10">
       {{ step }}
     </div>
+
     <div class="flex flex-col m-20" v-show="step == 1">
       <p class="text-6xl mb-8">Escribe el nombre de tu examen 📄</p>
       <input
@@ -128,6 +202,7 @@ const removeQuestion = (index: number) => {
         v-model="examen.name"
       />
     </div>
+
     <div v-show="step == 2" class="flex flex-col mx-20 my-10">
       <p class="text-6xl mb-8 text-center -mt-14">Datos de identificación📄</p>
       <p class="text-center mb-4">
@@ -224,48 +299,45 @@ const removeQuestion = (index: number) => {
         <h1 class="text-4xl font-bold">Examen Tipo A1</h1>
       </div>
 
-      <div class="border rounded-lg p-4 mb-8">
-        <h2 class="text-2xl font-bold">{{ examen.name }}</h2>
+      <div class="border p-4 mb-8">
+        <h2 class="text-2xl font-bold mb-2">{{ examen.name }}</h2>
         <p class="text-1xl">Escuela: {{ examen.school }}</p>
         <p class="text-1xl">Docente: {{ examen.teacher }}</p>
         <p class="text-1xl">Materia: {{ examen.subject }}</p>
-        <p class="text-1xl">Fecha: ________________________</p>
+        <p class="text-1xl">Fecha:_________</p>
       </div>
 
-      <div class="border rounded-lg p-4 mb-4">
-        <h2 class="text-2xl font-bold">Instrucciones</h2>
+      <div class="border p-4 mb-4">
+        <h2 class="text-2xl font-bold mb-2">Instrucciones</h2>
         <p class="text-1xl">1. Este examen consta de {{ examen.questions.length }} preguntas.</p>
         <p class="text-1xl">2. No se permite el uso de dispositivos electrónicos.</p>
-        <p class="text-1xl">3. Tiempo máximo: 60 minutos.</p>
-      </div>
+        <p class="text-1xl mb-4">3. Tiempo máximo: 60 minutos.</p>
 
-      <div v-for="(question, index) in examen.questions" :key="index">
-        <div class="border rounded-lg p-4 mb-4">
+        <div v-for="(question, index) in examen.questions" :key="index">
           <h3 class="text-2xl font-bold">Pregunta {{ index + 1 }}</h3>
-          <p class="text-1xl">{{ question.question }}</p>
-          <ul class="list-disc list-inside">
-            <li
-              v-for="(option, optionIndex) in question.options"
-              :key="optionIndex"
-              class="text-1xl"
-            >
-              ( ) {{ option.option }}
-            </li>
-          </ul>
+          <p class="text-1x1">{{ question.question }}</p>
+          <div
+            v-for="(option, optionIndex) in question.options"
+            :key="optionIndex"
+            class="text-1xl"
+          >
+            {{ getInciso(optionIndex) }} {{ option.option }}{{ option.option }}
+          </div>
         </div>
-      </div>
 
-      <div class="border rounded-lg p-4 mb-4 text-center">
-        <p class="text-1xl">Calificación: _________________ / 10</p>
-        <p class="text-1xl">Firma del Estudiante: __________________________</p>
-        <p class="text-1xl">Firma del Profesor: ___________________________</p>
+        <p class="text-1xl mb-4">Calificación: ________ / 10</p>
+        <p class="text-1xl mb-4">Firma del Estudiante: __________________________</p>
+        <p class="text-1xl mb-4">Firma del Profesor: ___________________________</p>
       </div>
     </div>
 
     <div v-show="step == 5" class="flex flex-col mx-20 my-10">
       <p class="text-6xl mb-8 text-center -mt-14">Descargar el examen en PDF 📥</p>
+      <p class="text-center mb-4">
+        Si todo esta en orden ¡Descargalo en PDF ya listo para imprimir!
+      </p>
       <div class="text-center mb-4">
-        <button class="bg-blue-500 text-white p-2 px-4 rounded-md" @click="printPDF">
+        <button class="bg-blue-500 text-white p-2 px-4 rounded-md" @click="downloadPDF">
           Descargar PDF
         </button>
       </div>
@@ -311,23 +383,5 @@ const removeQuestion = (index: number) => {
 }
 .directions > p {
   font-weight: bold;
-}
-
-@media print {
-  /* Estilos para la impresión */
-  /* Puedes personalizar la apariencia del PDF aquí */
-  body {
-    margin: 0;
-    padding: 20px;
-  }
-
-  /* Añade estilos específicos para elementos en el PDF */
-  /* Por ejemplo: */
-  .print-header {
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  /* ... (otros estilos de impresión) */
 }
 </style>
