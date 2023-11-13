@@ -92,25 +92,26 @@ function flipCard(index:number){
         </div>
         <!-- MORADO-->
         <div :class="{
-          'bg-gradient-to-b from-purple-200 rounded-xl cursor-pointer hover:scale-[110%] hover:transition-all': flip[3] == false,
+          'bg-gradient-to-b from-gray-400 rounded-xl cursor-pointer ': flip[3] == false,
           'bg-purple-200 rounded-xl cursor-pointer transform rotate-y-180 transition-all': flip[3] == true
-          }" @click="flipCard([3])">
+          }" >
           <div class=" w-[18rem] h-[28rem] relative flip-card ">
             <div class="flip-card-inner " >
               <div class="flip-card-front  " v-show="flip[3] == false" >
                 <div class="flex flex-col justify-between h-full">
-                  <BeakerIcon class="stroke-[0.5] stroke-purple-500 w-60 self-center mt-10"/>
-                  <p class="text-2xl  text-purple-500 mx-5 my-5">03.<br>Inteligencia artificial</p>
+                  <BeakerIcon class="stroke-[0.5] stroke-gray-500 w-60 self-center mt-10"/>
+                  <p class="text-2xl  text-gray-500 mx-5 my-5">03.<br>Inteligencia artificial</p>
+                  <p class="bg-red-500 sticky bottom-40 right-28 p-2 rounded-lg text-white w-fit ml-20">PROXIMAMENTE</p>
                 </div>
               </div>
               <div class="flip-card-back" v-show="flip[3] == true">
                 <div class="flex flex-col justify-between h-full ">
                   <div class="flex items-center justify-around">
-                    <p class="text-lg  text-purple-500 mt-20">03.<br>Inteligencia artificial</p>
+                    <p class="text-lg  text-gray-500 mt-20">03.<br>Inteligencia artificial</p>
                     <BeakerIcon class="stroke-[0.5] stroke-purple-500 w-20 "/>
                   </div>
                   <div class="flex flex-col w-full">
-                    <p class="text-md  text-white font-bold mx-5 my-5">Escribe el tema que deseas y la <span class="text-purple-400">IA</span> crea un examen por ti</p>
+                    <p class="text-md  text-white font-bold mx-5 my-5">Escribe el tema que deseas y la <span class="text-gray-400">IA</span> crea un examen por ti</p>
                     <ul class="text-sm ml-3 text-white ">
                       <li><CheckCircleIcon class="w-3 fill-purple-600"/>Selecciona un tema</li>
                       <li><CheckCircleIcon class="w-3 fill-purple-600"/>Selecciona el tipo de preguntas</li>
