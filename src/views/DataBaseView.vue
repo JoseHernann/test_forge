@@ -17,7 +17,7 @@ const exam = reactive({
   typeOfQuestions: '',
   maxQuestions: 0
 })
-const materias = ref(['Español', 'Matematicas' , 'Ciencias Naturales' , 'Fisica'])
+const materias = ref(['Español', 'Matematicas' , 'Ciencias Naturales' ])
 const Types = ref(['Opción multiple', 'Abiertas'])
 
 const themes = ref<Array<string>>([])
