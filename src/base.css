@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+/* Colores de la notificaciones  */
+
+.colored-toast.swal2-icon-success {
+    background-color: rgba(165, 220, 134, 0.82) !important;
+    border: 2px solid rgba(24, 122, 32, 0.85) !important;
+}
+
+.colored-toast.swal2-icon-error {
+    background-color: rgba(243, 168, 168, 0.91) !important;
+    border: 2px solid rgba(255, 53, 40, 0.82) !important;
+}
+
+.colored-toast.swal2-icon-warning {
+    background-color: rgba(252, 202, 162, 0.91) !important;
+    border: 2px solid rgb(255, 154, 72) !important;
+}
+
+.colored-toast.swal2-icon-info {
+    background-color: rgba(123, 205, 229, 0.88) !important;
+    border: 2px solid rgb(12, 178, 225) !important;
+}
+
+.colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+    color: rgb(255, 255, 255);
+}
+
+.swal-container{
+    margin-top: 2rem !important;
+    margin-right: 3rem !important;
+}
+=======
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
